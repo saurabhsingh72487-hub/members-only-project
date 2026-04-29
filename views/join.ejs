@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="/styles.css">
+<h1>Join Club</h1>
+
+<form method="POST">
+  <input name="passcode" placeholder="Enter passcode" />
+  <button>Join</button>
+</form>
+
+<% if (error) { %>
+  <p><%= error %></p>
+<% } %>

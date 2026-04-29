@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/styles.css">
+<h1>Messages</h1>
+
+<% if (currentUser) { %>
+  <a href="/messages/new">New Message</a>
+  <a href="/logout">Logout</a>
+  <a href="/join">Join Club</a>
+<% } else { %>
+  <a href="/login">Login</a>
+  <a href="/signup">Signup</a>
+<% } %>
+
+<hr>
+
+<% messages.forEach(msg => { %>
+  <h3><%= msg.title %></h3>
+  <p><%= msg.text %></p>
+
+  <% if (currentUser && currentUser.membershipStatus) { %>
+    <p>By <%= msg.User.firstName %> on <%= msg.createdAt.toDateString() %></p>
+  <% } else { %>
+    <p>Join club to see author</p>
+  <% } %>
+
+  <% if (currentUser && currentUser.isAdmin) { %>
+    <form method="POST" action="/messages/<%= msg.id %>?_method=DELETE">
+      <button>Delete</button>
+    </form>
+  <% } %>
+
+  <hr>
+<% }) %>
